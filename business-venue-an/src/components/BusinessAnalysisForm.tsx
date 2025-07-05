@@ -28,8 +28,9 @@ export function BusinessAnalysisForm({ onSubmit, loading = false }: BusinessAnal
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+    <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-lg" style={{backgroundColor: '#FDF1C9'}}>
+      <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center flex items-center justify-center gap-2">
+        <img src="/logo.jpg" alt="Sprout Point Logo" style={{ width: 40, height: 40 }} className="inline-block" />
         Sprout Point
       </h1>
       
