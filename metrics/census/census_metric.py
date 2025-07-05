@@ -8,6 +8,29 @@ class CensusDataProcessor:
     """
     A class to process and combine census data from both census.geojson and census_data.csv files.
     Matches GeoUID from CSV with ID from GeoJSON to provide comprehensive demographic analysis.
+
+    gives the following metrics:
+    - population density
+    - median income
+    - median dwelling value
+    - average age
+    - average household size
+    - total households
+
+    use this class by calling the calculate_demographic_stats method with the following arguments:
+    - latitude: float
+    - longitude: float
+    - walking_radius_km: float
+    - driving_radius_km: float
+
+    this will return a dictionary with the following keys: 
+    - location: dictionary with latitude and longitude
+    - radii: dictionary with walking and driving radii
+    - walking_radius: dictionary with the following keys:
+        - total_population: int
+        - num_areas: int
+        - avg_population_density: float
+        - avg_median_income: float
     """
     
     def __init__(self, geojson_path: str = "data/census.geojson", csv_path: str = "data/census_data.csv"):
