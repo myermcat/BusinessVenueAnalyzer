@@ -27,6 +27,7 @@ from dotenv import load_dotenv
 import os
 import httpx
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 from dotenv import load_dotenv
@@ -39,6 +40,15 @@ if not GOOGLE_API_KEY:
     raise RuntimeError("GOOGLE_PLACES_API_KEY not set in environment or .env file")
 
 app = FastAPI(title="Business Proximity API", version="1.0.0")
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 class BusinessProximityRequest(BaseModel):
     places_type: str = Field(..., description="Comma-separated Google place types, e.g. 'cafe,restaurant'")
@@ -144,7 +154,7 @@ async def health():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("metrics.traffic.traffic_school_business_proximity.business_proximity_api:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("metrics.traffic.traffic_school_business_proximity.business_proximity_api:app", host="0.0.0.0", port=8002, reload=True)
 
 # Ensure .env variables are loaded when running outside of the FastAPI context
 load_dotenv()

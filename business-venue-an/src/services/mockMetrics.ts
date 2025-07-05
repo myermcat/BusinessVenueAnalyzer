@@ -1,5 +1,6 @@
 import { MetricScore } from '@/types';
 import { censusApi, CensusAnalysisResponse } from './censusApi';
+import { parkingApi, ParkingAnalysisResponse } from './parkingApi';
 
 const metricsMap = {
   "restaurant_cafe": {
@@ -93,6 +94,7 @@ export async function generateMetricsWithCensusData(businessType: string, locati
   
   const metrics: MetricScore[] = [];
   let censusData: CensusAnalysisResponse | null = null;
+  let parkingData: ParkingAnalysisResponse | null = null;
   
   // Try to get real census data
   try {
@@ -103,6 +105,19 @@ export async function generateMetricsWithCensusData(businessType: string, locati
     });
   } catch (error) {
     console.warn('Failed to fetch census data, using mock data:', error);
+  }
+  
+  // Try to get real parking data
+  try {
+    parkingData = await parkingApi.analyzeParking({
+      places_type: 'parking',
+      location: location,
+      max_results: 10,
+      min_rating: 3.0,
+      enable_deep_analysis: true
+    });
+  } catch (error) {
+    console.warn('Failed to fetch parking data, using mock data:', error);
   }
   
   for (const [metricName, weight] of Object.entries(weights)) {
@@ -130,6 +145,17 @@ export async function generateMetricsWithCensusData(businessType: string, locati
       const density = censusData.walking_radius.avg_population_density;
       score = Math.min(100, Math.max(0, (density / 5000) * 100)); // Normalize to 5000/km² = 100 points
       description = `${metricDescriptions[metricName]} | Population Density: ${density.toLocaleString()} people/km²`;
+    } else if (parkingData && metricName === 'parking_availability') {
+      // Map parking data to availability score
+      const totalParkingSpots = parkingData.results.parking.length;
+      const avgRating = parkingData.deep_analysis.average_rating;
+      
+      // Score based on number of parking spots (0-10 = 0-60 points) + quality (rating 0-5 = 0-40 points)
+      const availabilityScore = Math.min(60, (totalParkingSpots / 10) * 60);
+      const qualityScore = Math.min(40, (avgRating / 5) * 40);
+      score = Math.round(availabilityScore + qualityScore);
+      
+      description = `${metricDescriptions[metricName]} | Found ${totalParkingSpots} parking locations | Avg Rating: ${avgRating.toFixed(1)}/5.0`;
     } else {
       // Use mock data for other metrics
       const baseScore = Math.random() * 40 + 40;
