@@ -11,11 +11,15 @@ from models.competitor_models import (
     OpeningHours,
     Review
 )
+from services.tavily_service import TavilyService
+from services.analysis_service import AnalysisService
 
 class PlacesService:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, tavily_service: TavilyService = None, analysis_service: AnalysisService = None):
         self.api_key = api_key
         self.base_url = "https://places.googleapis.com/v1/places:searchText"
+        self.tavily_service = tavily_service
+        self.analysis_service = analysis_service
         
     async def analyze_competitors(self, request: CompetitorAnalysisRequest) -> CompetitorAnalysisResponse:
         search_query = f"{request.business_type} in {request.location}"
@@ -28,6 +32,13 @@ class PlacesService:
         )
         
         competitors = self._parse_competitors(places_data)
+        
+        # Phase 2: Enhanced analysis if enabled
+        if request.enable_deep_analysis and self.tavily_service and self.analysis_service:
+            competitors = await self._enhance_competitors_with_analysis(
+                competitors, request.business_type, request.location
+            )
+        
         market_insights = self._generate_market_insights(competitors)
         
         query_info = QueryInfo(
@@ -161,3 +172,25 @@ class PlacesService:
             highly_rated_count=len([r for r in ratings if r >= 4.0]),
             market_saturation=saturation
         )
+    
+    async def _enhance_competitors_with_analysis(
+        self, 
+        competitors: List[Competitor], 
+        business_type: str, 
+        location: str
+    ) -> List[Competitor]:
+        # Prepare competitor data for Tavily searches
+        competitor_data = [
+            {"name": c.name, "location": location} 
+            for c in competitors
+        ]
+        
+        # Batch search competitors using Tavily
+        tavily_responses = await self.tavily_service.batch_search_competitors(competitor_data)
+        
+        # Generate LLM analysis for each competitor
+        enhanced_competitors = await self.analysis_service.batch_analyze_competitors(
+            competitors, tavily_responses, business_type, location
+        )
+        
+        return enhanced_competitors

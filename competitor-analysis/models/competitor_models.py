@@ -9,6 +9,7 @@ class CompetitorAnalysisRequest(BaseModel):
     max_results: int = Field(default=10, ge=1, le=20, description="Maximum number of competitors to return")
     min_rating: float = Field(default=0.0, ge=0.0, le=5.0, description="Minimum rating filter")
     open_now: bool = Field(default=False, description="Filter for currently open businesses")
+    enable_deep_analysis: bool = Field(default=True, description="Enable Phase 2 deep competitor analysis")
 
 class OpeningHours(BaseModel):
     open_now: bool
@@ -20,6 +21,17 @@ class Review(BaseModel):
     rating: int
     text: str
     time: Optional[datetime] = None
+
+class TavilySearchResult(BaseModel):
+    title: str
+    url: str
+    content: str
+    score: float
+
+class TavilyResponse(BaseModel):
+    query: str
+    ai_answer: Optional[str] = None
+    results: List[TavilySearchResult] = []
 
 class Competitor(BaseModel):
     name: str
@@ -33,6 +45,9 @@ class Competitor(BaseModel):
     opening_hours: Optional[OpeningHours] = None
     top_reviews: List[Review] = []
     place_id: str
+    competitor_analysis: Optional[str] = None
+    data_sources: List[str] = []
+    analysis_confidence: Optional[float] = None
 
 class QueryInfo(BaseModel):
     business_type: str
