@@ -4,41 +4,74 @@ import { useState } from 'react';
 import { BusinessAnalysisForm } from "../src/components/BusinessAnalysisForm"
 import { MetricsOverview } from '../src/components//MetricsOverview';
 import { CompetitorSection } from '../src/components/CompetitorSection';
-import { BusinessAnalysisRequest, BusinessAnalysisResult } from '../src/types';
-import { generateMockMetrics, calculateOverallScore } from '../src/services/mockMetrics';
+import { BusinessAnalysisRequest, BusinessAnalysisResult, Competitor, MarketInsights } from '../src/types';
+import { generateMetricsWithCensusData, calculateOverallScore } from '../src/services/mockMetrics';
+import { competitorApi } from '../src/services/competitorApi';
 
 export default function Home() {
   const [analysisResult, setAnalysisResult] = useState<BusinessAnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'competitors'>('overview');
+  const [competitors, setCompetitors] = useState<Competitor[]>([]);
+  const [marketInsights, setMarketInsights] = useState<MarketInsights | null>(null);
+  const [competitorLoading, setCompetitorLoading] = useState(false);
+  const [competitorError, setCompetitorError] = useState<string | null>(null);
 
   const handleAnalysisSubmit = async (request: BusinessAnalysisRequest) => {
     setLoading(true);
+    setCompetitorLoading(true);
+    setCompetitorError(null);
     
     try {
-      const metrics = generateMockMetrics(request.businessType, request.location);
+      // Generate metrics with real census data
+      const metrics = await generateMetricsWithCensusData(request.businessType, request.location);
       const overallScore = calculateOverallScore(metrics);
       
+      // Set initial result with metrics
       const result: BusinessAnalysisResult = {
         overallScore,
         metrics,
-        competitors: [], // Will be populated by CompetitorSection
+        competitors: [],
         location: request.location,
         businessType: request.businessType
       };
       
       setAnalysisResult(result);
       setActiveTab('overview');
+      setLoading(false);
+      
+      // Fetch competitors in background
+      try {
+        const competitorResponse = await competitorApi.analyzeCompetitors({
+          business_type: request.businessType,
+          location: request.location,
+          max_results: 10,
+          min_rating: 3.0,
+          enable_deep_analysis: true
+        });
+        
+        setCompetitors(competitorResponse.competitors);
+        setMarketInsights(competitorResponse.market_insights);
+      } catch (competitorError) {
+        setCompetitorError(competitorError instanceof Error ? competitorError.message : 'Failed to fetch competitors');
+      } finally {
+        setCompetitorLoading(false);
+      }
+      
     } catch (error) {
       console.error('Analysis failed:', error);
-    } finally {
       setLoading(false);
+      setCompetitorLoading(false);
     }
   };
 
   const handleStartOver = () => {
     setAnalysisResult(null);
     setActiveTab('overview');
+    setCompetitors([]);
+    setMarketInsights(null);
+    setCompetitorLoading(false);
+    setCompetitorError(null);
   };
 
   return (
@@ -97,8 +130,10 @@ export default function Home() {
                 />
               ) : (
                 <CompetitorSection
-                  businessType={analysisResult.businessType}
-                  location={analysisResult.location}
+                  competitors={competitors}
+                  marketInsights={marketInsights}
+                  loading={competitorLoading}
+                  error={competitorError}
                 />
               )}
             </div>

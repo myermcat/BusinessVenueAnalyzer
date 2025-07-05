@@ -178,8 +178,7 @@ if __name__ == '__main__':
     
     # Test addresses
     test_addresses = [
-        "466 Lisgar St, Ottawa, ON K1R 5H1",  # Real address
-        "123 no ave. Ottawa, ON K1R 5H1"     # Fake address
+        "centertown, Ottawa, canada"     # Fake address
     ]
     
     print("Address Validation Test")

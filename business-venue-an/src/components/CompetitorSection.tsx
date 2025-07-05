@@ -1,48 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Competitor } from '../types';
+import { Competitor, MarketInsights } from '../types';
 import { CompetitorCard } from './CompetitorCard';
-import { competitorApi } from '../services/competitorApi';
 
 interface CompetitorSectionProps {
-  businessType: string;
-  location: string;
+  competitors: Competitor[];
+  marketInsights: MarketInsights | null;
+  loading: boolean;
+  error: string | null;
 }
 
-export function CompetitorSection({ businessType, location }: CompetitorSectionProps) {
-  const [competitors, setCompetitors] = useState<Competitor[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [summary, setSummary] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchCompetitors = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const response = await competitorApi.analyzeCompetitors({
-          business_type: businessType,
-          location: location,
-          max_results: 10,
-          min_rating: 3.0,
-          enable_deep_analysis: true
-        });
-        
-        setCompetitors(response.competitors);
-        setSummary(response.market_insights);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch competitors');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (businessType && location) {
-      fetchCompetitors();
-    }
-  }, [businessType, location]);
+export function CompetitorSection({ competitors, marketInsights, loading, error }: CompetitorSectionProps) {
 
   if (loading) {
     return (
@@ -93,7 +61,7 @@ export function CompetitorSection({ businessType, location }: CompetitorSectionP
   return (
     <div className="space-y-6">
       {/* Summary */}
-      {summary && (
+      {marketInsights && (
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Competitor Analysis</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -102,22 +70,22 @@ export function CompetitorSection({ businessType, location }: CompetitorSectionP
               <div className="text-sm text-gray-600">Total Competitors</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">{summary.average_rating?.toFixed(1) || 'N/A'}</div>
+              <div className="text-2xl font-bold text-green-600">{marketInsights.average_rating?.toFixed(1) || 'N/A'}</div>
               <div className="text-sm text-gray-600">Average Rating</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{summary.market_saturation}</div>
+              <div className="text-2xl font-bold text-purple-600">{marketInsights.market_saturation}</div>
               <div className="text-sm text-gray-600">Market Saturation</div>
             </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="text-center">
-              <div className="text-xl font-bold text-orange-600">{summary.total_reviews}</div>
+              <div className="text-xl font-bold text-orange-600">{marketInsights.total_reviews}</div>
               <div className="text-sm text-gray-600">Total Reviews</div>
             </div>
             <div className="text-center">
-              <div className="text-xl font-bold text-indigo-600">{summary.highly_rated_count}</div>
+              <div className="text-xl font-bold text-indigo-600">{marketInsights.highly_rated_count}</div>
               <div className="text-sm text-gray-600">Highly Rated (4.0+)</div>
             </div>
           </div>
@@ -125,13 +93,13 @@ export function CompetitorSection({ businessType, location }: CompetitorSectionP
       )}
 
       {/* Competitors Grid */}
-      {competitors.length > 0 ? (
+      {!loading && competitors.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {competitors.map((competitor, index) => (
             <CompetitorCard key={competitor.place_id || index} competitor={competitor} />
           ))}
         </div>
-      ) : (
+      ) : !loading && competitors.length === 0 && !error ? (
         <div className="bg-white rounded-lg shadow-md p-6 text-center">
           <div className="text-gray-500 mb-4">
             <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,7 +111,7 @@ export function CompetitorSection({ businessType, location }: CompetitorSectionP
             We couldn't find any competitors in this area. This could be a great opportunity for your business!
           </p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

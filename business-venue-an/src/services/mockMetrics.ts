@@ -1,36 +1,39 @@
 import { MetricScore } from '@/types';
+import { censusApi, CensusAnalysisResponse } from './censusApi';
 
 const metricsMap = {
   "restaurant_cafe": {
-    "foot_traffic": 0.35,
-    "competitor_count": 0.3,
-    "school_business_proximity": 0.2,
-    "parking_availability": 0.1,
-    "local_income": 0.05
+    "foot_traffic": 0.3,
+    "competitor_count": 0.25,
+    "local_income": 0.2,
+    "dwelling_value": 0.15,
+    "parking_availability": 0.1
   },
   "office_clinic": {
-    "rent_cost": 0.4,
-    "quiet_zone": 0.3,
-    "parking_availability": 0.2,
+    "rent_cost": 0.3,
+    "local_income": 0.25,
+    "dwelling_value": 0.2,
+    "parking_availability": 0.15,
     "public_transit_access": 0.1
   },
   "boutique_storefront": {
-    "visibility_from_street": 0.3,
-    "walkability": 0.25,
-    "foot_traffic": 0.2,
-    "nearby_shops": 0.15,
-    "aesthetic_quality": 0.1
+    "foot_traffic": 0.25,
+    "local_income": 0.25,
+    "dwelling_value": 0.2,
+    "visibility_from_street": 0.15,
+    "nearby_shops": 0.15
   },
   "studio_gym": {
-    "floor_space_estimate": 0.4,
-    "noise_tolerance_zone": 0.2,
-    "population_density": 0.2,
-    "accessibility": 0.2
+    "population_density": 0.3,
+    "local_income": 0.25,
+    "dwelling_value": 0.2,
+    "accessibility": 0.15,
+    "noise_tolerance_zone": 0.1
   },
   "services": {
-    "low_crime_rate": 0.3,
-    "reputation_area_score": 0.25,
-    "nearby_complementary_services": 0.2,
+    "local_income": 0.3,
+    "dwelling_value": 0.25,
+    "low_crime_rate": 0.2,
     "commute_accessibility": 0.15,
     "parking_availability": 0.1
   }
@@ -42,6 +45,7 @@ const metricDescriptions: { [key: string]: string } = {
   "school_business_proximity": "Distance to educational institutions",
   "parking_availability": "Available parking spaces for customers",
   "local_income": "Average household income in the area",
+  "dwelling_value": "Average property values in the neighborhood",
   "rent_cost": "Commercial rental prices in the location",
   "quiet_zone": "Noise levels and peaceful environment",
   "public_transit_access": "Proximity to public transportation",
@@ -77,6 +81,69 @@ export function generateMockMetrics(businessType: string, location: string): Met
       score: Math.round(score),
       weight: weight,
       description: metricDescriptions[metricName] || `Analysis for ${metricName.replace(/_/g, ' ')}`
+    });
+  }
+  
+  return metrics;
+}
+
+export async function generateMetricsWithCensusData(businessType: string, location: string): Promise<MetricScore[]> {
+  const businessKey = businessType.toLowerCase().replace(/\s+/g, '_');
+  const weights = metricsMap[businessKey as keyof typeof metricsMap] || metricsMap.restaurant_cafe;
+  
+  const metrics: MetricScore[] = [];
+  let censusData: CensusAnalysisResponse | null = null;
+  
+  // Try to get real census data
+  try {
+    censusData = await censusApi.analyzeDemographics({
+      address: location,
+      walking_radius_km: 1.0,
+      driving_radius_km: 3.0
+    });
+  } catch (error) {
+    console.warn('Failed to fetch census data, using mock data:', error);
+  }
+  
+  for (const [metricName, weight] of Object.entries(weights)) {
+    let score: number;
+    let description = metricDescriptions[metricName] || `Analysis for ${metricName.replace(/_/g, ' ')}`;
+    
+    // Use real census data for specific metrics, fallback to mock for others
+    if (censusData && metricName === 'local_income') {
+      // Map median income to a 0-100 score
+      const income = censusData.walking_radius.avg_median_income;
+      score = Math.min(100, Math.max(0, (income / 100000) * 100)); // Normalize to $100k = 100 points
+      description = `${metricDescriptions[metricName]} | Median Income: $${income.toLocaleString()}`;
+    } else if (censusData && metricName === 'dwelling_value') {
+      // Map dwelling value to a 0-100 score
+      const dwellingValue = censusData.walking_radius.avg_median_dwelling_value;
+      score = Math.min(100, Math.max(0, (dwellingValue / 800000) * 100)); // Normalize to $800k = 100 points
+      description = `${metricDescriptions[metricName]} | Median Home Value: $${dwellingValue.toLocaleString()}`;
+    } else if (censusData && metricName === 'foot_traffic') {
+      // Map population density to foot traffic score
+      const density = censusData.walking_radius.avg_population_density;
+      score = Math.min(100, Math.max(0, (density / 5000) * 100)); // Normalize to 5000/km² = 100 points
+      description = `${metricDescriptions[metricName]} | Population Density: ${density.toLocaleString()} people/km²`;
+    } else if (censusData && metricName === 'population_density') {
+      // Direct population density mapping
+      const density = censusData.walking_radius.avg_population_density;
+      score = Math.min(100, Math.max(0, (density / 5000) * 100)); // Normalize to 5000/km² = 100 points
+      description = `${metricDescriptions[metricName]} | Population Density: ${density.toLocaleString()} people/km²`;
+    } else {
+      // Use mock data for other metrics
+      const baseScore = Math.random() * 40 + 40;
+      const locationModifier = location.toLowerCase().includes('downtown') ? 10 : 0;
+      const businessModifier = businessType.toLowerCase().includes('cafe') ? 5 : 0;
+      score = Math.min(100, Math.max(0, baseScore + locationModifier + businessModifier));
+      description = `${description} | Estimated based on location factors`;
+    }
+    
+    metrics.push({
+      name: metricName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      score: Math.round(score),
+      weight: weight,
+      description: description
     });
   }
   
