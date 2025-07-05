@@ -78,8 +78,11 @@ export default function Home() {
     <div className="relative min-h-screen w-full">
       {/* Full-page background image */}
       <div
-        className="fixed inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/business-bg.jpg')" }}
+        className="fixed inset-0 z-0 bg-cover bg-center transition-opacity duration-300"
+        style={{ 
+          backgroundImage: "url('/business-bg.jpg')",
+          opacity: analysisResult ? 0.5 : 1
+        }}
         aria-hidden="true"
       />
 
