@@ -30,7 +30,7 @@ export function BusinessAnalysisForm({ onSubmit, loading = false }: BusinessAnal
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-        Business Venue Analyzer
+        Sprout Point
       </h1>
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -72,7 +72,7 @@ export function BusinessAnalysisForm({ onSubmit, loading = false }: BusinessAnal
         <button
           type="submit"
           disabled={loading || !businessType || !location}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-[#0F3E69] text-white py-2 px-4 rounded-md hover:bg-[#0A2B4D] focus:outline-none focus:ring-2 focus:ring-[#0F3E69] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'Analyzing...' : 'Analyze Location'}
         </button>
