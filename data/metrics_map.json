@@ -1,0 +1,46 @@
+
+{
+  "restaurant_cafe": {
+    "metrics": {
+      "foot_traffic": 0.35,
+      "competitor_count": 0.3,
+      "avg_rating_nearby": 0.2,
+      "parking_availability": 0.1,
+      "school_proximity": 0.05
+    }
+  },
+  "office_clinic": {
+    "metrics": {
+      "rent_cost": 0.4,
+      "quiet_zone": 0.3,
+      "parking_availability": 0.2,
+      "public_transit_access": 0.1
+    }
+  },
+  "boutique_storefront": {
+    "metrics": {
+      "visibility_from_street": 0.3,
+      "walkability": 0.25,
+      "foot_traffic": 0.2,
+      "nearby_shops": 0.15,
+      "aesthetic_quality": 0.1
+    }
+  },
+  "studio_gym": {
+    "metrics": {
+      "floor_space_estimate": 0.4,
+      "noise_tolerance_zone": 0.2,
+      "population_density": 0.2,
+      "accessibility": 0.2
+    }
+  },
+  "services": {
+    "metrics": {
+      "low_crime_rate": 0.3,
+      "reputation_area_score": 0.25,
+      "nearby_complementary_services": 0.2,
+      "commute_accessibility": 0.15,
+      "parking_availability": 0.1
+    }
+  }
+}
