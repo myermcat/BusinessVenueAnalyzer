@@ -1,6 +1,7 @@
 import { MetricScore } from '@/types';
 import { censusApi, CensusAnalysisResponse } from './censusApi';
 import { parkingApi, ParkingAnalysisResponse } from './parkingApi';
+import { competitorCountApi, CompetitorCountResponse } from './competitorCountApi';
 
 const metricsMap = {
   "restaurant_cafe": {
@@ -95,6 +96,7 @@ export async function generateMetricsWithCensusData(businessType: string, locati
   const metrics: MetricScore[] = [];
   let censusData: CensusAnalysisResponse | null = null;
   let parkingData: ParkingAnalysisResponse | null = null;
+  let competitorCountData: CompetitorCountResponse | null = null;
   
   // Try to get real census data
   try {
@@ -118,6 +120,18 @@ export async function generateMetricsWithCensusData(businessType: string, locati
     });
   } catch (error) {
     console.warn('Failed to fetch parking data, using mock data:', error);
+  }
+  
+  // Try to get competitor count data
+  try {
+    competitorCountData = await competitorCountApi.countCompetitors({
+      business_type: businessType,
+      location: location,
+      max_results: 20,
+      min_rating: 0.0
+    });
+  } catch (error) {
+    console.warn('Failed to fetch competitor count data, using mock data:', error);
   }
   
   for (const [metricName, weight] of Object.entries(weights)) {
@@ -156,6 +170,19 @@ export async function generateMetricsWithCensusData(businessType: string, locati
       score = Math.round(availabilityScore + qualityScore);
       
       description = `${metricDescriptions[metricName]} | Found ${totalParkingSpots} parking locations | Avg Rating: ${avgRating.toFixed(1)}/5.0`;
+    } else if (competitorCountData && metricName === 'competitor_count') {
+      // Map competitor count to competition intensity score
+      const competitorCount = competitorCountData.competitor_count;
+      
+      // Inverse scoring: fewer competitors = higher score (better for business)
+      // 0 competitors = 100 points, 20+ competitors = 10 points
+      if (competitorCount === 0) {
+        score = 100;
+      } else {
+        score = Math.max(10, 100 - (competitorCount * 4.5)); // Linear decrease
+      }
+      
+      description = `${metricDescriptions[metricName]} | Found ${competitorCount} direct competitors in the area`;
     } else {
       // Use mock data for other metrics
       const baseScore = Math.random() * 40 + 40;
