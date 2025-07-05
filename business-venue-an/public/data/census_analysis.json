@@ -1,0 +1,476 @@
+{
+  "metadata": {
+    "total_areas": 2045,
+    "total_population": 1488307,
+    "total_area_km2": 8047.0,
+    "overall_density": 185.0,
+    "total_dwellings": 638013,
+    "total_households": 604721,
+    "dwelling_household_ratio": 1.06,
+    "analysis_date": "2024",
+    "data_source": "census_data.csv"
+  },
+  "weighted_averages": {
+    "average_age": {
+      "weighted_average": 40.8,
+      "simple_average": 41.9,
+      "median": 41.6,
+      "range": {
+        "min": 25.8,
+        "max": 77.0
+      },
+      "valid_records": 2042,
+      "total_records": 2045,
+      "completion_rate": 99.9
+    },
+    "average_household_size": {
+      "weighted_average": 2.5,
+      "simple_average": 2.5,
+      "median": 2.5,
+      "range": {
+        "min": 1.3,
+        "max": 4.4
+      },
+      "valid_records": 2042,
+      "total_records": 2045,
+      "completion_rate": 99.9
+    },
+    "median_income": {
+      "weighted_average": 51791,
+      "simple_average": 51378,
+      "median": 51200,
+      "range": {
+        "min": 21800,
+        "max": 102000
+      },
+      "valid_records": 2003,
+      "total_records": 2045,
+      "completion_rate": 97.9
+    },
+    "median_dwelling_value": {
+      "weighted_average": 556616,
+      "simple_average": 550445,
+      "median": 548000,
+      "range": {
+        "min": 128000,
+        "max": 2500000
+      },
+      "valid_records": 1936,
+      "total_records": 2045,
+      "completion_rate": 94.7
+    },
+    "population_density": {
+      "weighted_average": 3827.8,
+      "simple_average": 3912.1,
+      "median": 3051.6,
+      "range": {
+        "min": 0.0,
+        "max": 70113.6
+      },
+      "valid_records": 2045,
+      "total_records": 2045,
+      "completion_rate": 100.0
+    }
+  },
+  "quintile_analysis": {
+    "population_quintiles": {
+      "Q1_Lowest_20": {
+        "description": "Lowest 20% by population",
+        "areas_count": 410,
+        "total_population": 142186,
+        "average_population": 347,
+        "median_population": 362,
+        "total_area_km2": 319.9,
+        "average_area_km2": 0.78,
+        "population_range": {
+          "min": 248,
+          "max": 409
+        }
+      },
+      "Q2": {
+        "description": "Second quintile by population",
+        "areas_count": 409,
+        "total_population": 193308,
+        "average_population": 473,
+        "median_population": 473,
+        "total_area_km2": 1168.4,
+        "average_area_km2": 2.86,
+        "population_range": {
+          "min": 410,
+          "max": 564
+        }
+      },
+      "Q3": {
+        "description": "Third quintile by population",
+        "areas_count": 408,
+        "total_population": 232425,
+        "average_population": 570,
+        "median_population": 565,
+        "total_area_km2": 2017.3,
+        "average_area_km2": 4.94,
+        "population_range": {
+          "min": 565,
+          "max": 726
+        }
+      },
+      "Q4": {
+        "description": "Fourth quintile by population",
+        "areas_count": 409,
+        "total_population": 300768,
+        "average_population": 735,
+        "median_population": 727,
+        "total_area_km2": 2378.9,
+        "average_area_km2": 5.82,
+        "population_range": {
+          "min": 727,
+          "max": 1183
+        }
+      },
+      "Q5_Highest_20": {
+        "description": "Highest 20% by population",
+        "areas_count": 409,
+        "total_population": 619620,
+        "average_population": 1515,
+        "median_population": 1184,
+        "total_area_km2": 2162.5,
+        "average_area_km2": 5.29,
+        "population_range": {
+          "min": 1184,
+          "max": 2480
+        }
+      }
+    },
+    "metric_medians_by_quintile": {
+      "average_age": {
+        "Q1_Lowest_20": 43.1,
+        "Q2": 42.3,
+        "Q3": 41.9,
+        "Q4": 40.6,
+        "Q5_Highest_20": 38.9,
+        "overall_median": 41.6
+      },
+      "average_household_size": {
+        "Q1_Lowest_20": 2.5,
+        "Q2": 2.4,
+        "Q3": 2.5,
+        "Q4": 2.6,
+        "Q5_Highest_20": 2.6,
+        "overall_median": 2.5
+      },
+      "median_income": {
+        "Q1_Lowest_20": 50000,
+        "Q2": 50000,
+        "Q3": 51400,
+        "Q4": 50800,
+        "Q5_Highest_20": 53200,
+        "overall_median": 51200
+      },
+      "median_dwelling_value": {
+        "Q1_Lowest_20": 500000,
+        "Q2": 548000,
+        "Q3": 552000,
+        "Q4": 552000,
+        "Q5_Highest_20": 500000,
+        "overall_median": 548000
+      },
+      "population_density": {
+        "Q1_Lowest_20": 3286.6,
+        "Q2": 3084.6,
+        "Q3": 3083.9,
+        "Q4": 2932.4,
+        "Q5_Highest_20": 2577.6,
+        "overall_median": 3051.6
+      },
+      "area_km2": {
+        "Q1_Lowest_20": 0.11,
+        "Q2": 0.15,
+        "Q3": 0.18,
+        "Q4": 0.25,
+        "Q5_Highest_20": 0.56,
+        "overall_median": 0.19
+      },
+      "population": {
+        "Q1_Lowest_20": 361.5,
+        "Q2": 473.0,
+        "Q3": 565.0,
+        "Q4": 727.0,
+        "Q5_Highest_20": 1184.0,
+        "overall_median": 565.0
+      },
+      "dwellings": {
+        "Q1_Lowest_20": 146.0,
+        "Q2": 196.0,
+        "Q3": 235.0,
+        "Q4": 297.0,
+        "Q5_Highest_20": 490.0,
+        "overall_median": 246.0
+      },
+      "households": {
+        "Q1_Lowest_20": 141.0,
+        "Q2": 190.0,
+        "Q3": 227.0,
+        "Q4": 287.0,
+        "Q5_Highest_20": 470.0,
+        "overall_median": 233.0
+      }
+    }
+  },
+  "cafe_scoring_optimal_ranges": {
+    "population_density": {
+      "description": "Population per square kilometer",
+      "unit": "people/km²",
+      "excellent": {
+        "min": 3000,
+        "max": 4000,
+        "description": "High density urban areas - optimal for cafes"
+      },
+      "good": {
+        "min": 2500,
+        "max": 5000,
+        "description": "Good density for cafe success"
+      },
+      "acceptable": {
+        "min": 2000,
+        "max": 6000,
+        "description": "Acceptable range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 2000,
+        "description": "Too low density - insufficient customers"
+      },
+      "too_high": {
+        "min": 6000,
+        "max": null,
+        "description": "Overcrowded - parking and space issues"
+      }
+    },
+    "local_income": {
+      "description": "Median household income",
+      "unit": "CAD",
+      "excellent": {
+        "min": 52000,
+        "max": 60000,
+        "description": "Higher income areas - supports cafe spending"
+      },
+      "good": {
+        "min": 50000,
+        "max": 65000,
+        "description": "Good income level for cafe business"
+      },
+      "acceptable": {
+        "min": 45000,
+        "max": 70000,
+        "description": "Acceptable income range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 45000,
+        "description": "Lower income - may not support cafe prices"
+      },
+      "too_high": {
+        "min": 70000,
+        "max": null,
+        "description": "Very high income - may prefer different venues"
+      }
+    },
+    "housing_value": {
+      "description": "Median dwelling value",
+      "unit": "CAD",
+      "excellent": {
+        "min": 550000,
+        "max": 650000,
+        "description": "Stable middle-class areas"
+      },
+      "good": {
+        "min": 500000,
+        "max": 700000,
+        "description": "Good housing value range"
+      },
+      "acceptable": {
+        "min": 450000,
+        "max": 800000,
+        "description": "Acceptable housing value range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 450000,
+        "description": "Lower value areas - may indicate economic challenges"
+      },
+      "too_high": {
+        "min": 800000,
+        "max": null,
+        "description": "Very expensive areas"
+      }
+    },
+    "demographic_age": {
+      "description": "Average age of residents",
+      "unit": "years",
+      "excellent": {
+        "min": 38,
+        "max": 42,
+        "description": "Working-age population - ideal for cafes"
+      },
+      "good": {
+        "min": 37,
+        "max": 44,
+        "description": "Good age demographic for cafe business"
+      },
+      "acceptable": {
+        "min": 35,
+        "max": 46,
+        "description": "Acceptable age range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 35,
+        "description": "Very young population - limited disposable income"
+      },
+      "too_high": {
+        "min": 46,
+        "max": null,
+        "description": "Older population - may prefer different venues"
+      }
+    },
+    "household_size": {
+      "description": "Average household size",
+      "unit": "people",
+      "excellent": {
+        "min": 2.4,
+        "max": 2.7,
+        "description": "Family-friendly size - supports cafe visits"
+      },
+      "good": {
+        "min": 2.3,
+        "max": 2.8,
+        "description": "Good household size for cafe business"
+      },
+      "acceptable": {
+        "min": 2.2,
+        "max": 3.0,
+        "description": "Acceptable household size range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 2.2,
+        "description": "Very small households - mostly singles"
+      },
+      "too_high": {
+        "min": 3.0,
+        "max": null,
+        "description": "Very large households - may prefer restaurants"
+      }
+    },
+    "total_population": {
+      "description": "Total population in area",
+      "unit": "people",
+      "excellent": {
+        "min": 700,
+        "max": 1200,
+        "description": "Good customer base size"
+      },
+      "good": {
+        "min": 500,
+        "max": 1500,
+        "description": "Good population for cafe business"
+      },
+      "acceptable": {
+        "min": 400,
+        "max": 2000,
+        "description": "Acceptable population range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 400,
+        "description": "Too small population - insufficient customers"
+      },
+      "too_high": {
+        "min": 2000,
+        "max": null,
+        "description": "Too large population - may be too crowded"
+      }
+    },
+    "area_coverage": {
+      "description": "Total area coverage",
+      "unit": "km²",
+      "excellent": {
+        "min": 0.15,
+        "max": 0.30,
+        "description": "Good accessibility - walkable area"
+      },
+      "good": {
+        "min": 0.10,
+        "max": 0.40,
+        "description": "Good area coverage for cafe business"
+      },
+      "acceptable": {
+        "min": 0.08,
+        "max": 0.60,
+        "description": "Acceptable area range"
+      },
+      "poor": {
+        "min": 0,
+        "max": 0.08,
+        "description": "Too small area - very cramped"
+      },
+      "too_high": {
+        "min": 0.60,
+        "max": null,
+        "description": "Too large area - too spread out"
+      }
+    }
+  },
+  "metric_weights": {
+    "population_density": 0.25,
+    "local_income": 0.20,
+    "total_population": 0.20,
+    "demographic_age": 0.15,
+    "household_size": 0.10,
+    "housing_value": 0.05,
+    "area_coverage": 0.05
+  },
+  "scoring_categories": {
+    "excellent": {
+      "score_range": {
+        "min": 85,
+        "max": 100
+      },
+      "description": "Ideal cafe location with strong potential"
+    },
+    "good": {
+      "score_range": {
+        "min": 70,
+        "max": 84
+      },
+      "description": "Good location with solid potential"
+    },
+    "acceptable": {
+      "score_range": {
+        "min": 55,
+        "max": 69
+      },
+      "description": "Acceptable location - consider additional factors"
+    },
+    "poor": {
+      "score_range": {
+        "min": 40,
+        "max": 54
+      },
+      "description": "Poor location - significant challenges expected"
+    },
+    "very_poor": {
+      "score_range": {
+        "min": 0,
+        "max": 39
+      },
+      "description": "Very poor location - not recommended"
+    }
+  },
+  "category_scores": {
+    "excellent": 100,
+    "good": 80,
+    "acceptable": 60,
+    "poor": 30,
+    "too_high": 20
+  }
+} 
