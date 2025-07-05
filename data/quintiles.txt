@@ -1,0 +1,217 @@
+Loading census data...
+Loaded 2045 census areas
+Total population: 1,488,307
+
+Creating quintiles based on population...
+
+================================================================================
+QUINTILE ANALYSIS - MEDIAN VALUES BY POPULATION SEGMENT
+================================================================================
+
+Average Age:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      43.1            43.0                 407       
+Q2                   42.3            42.3                 409       
+Q3                   41.9            41.9                 408       
+Q4                   40.6            40.6                 409       
+Q5 (Highest 20%)     38.9            37.2                 409       
+-----------------------------------------------------------------
+Overall Median       41.6            N/A                  2042      
+Valid Records: 2042/2045 (99.9%)
+
+Average Household Size:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      2.5             2.5                  407       
+Q2                   2.4             2.4                  409       
+Q3                   2.5             2.5                  408       
+Q4                   2.6             2.6                  409       
+Q5 (Highest 20%)     2.6             2.7                  409       
+-----------------------------------------------------------------
+Overall Median       2.5             N/A                  2042      
+Valid Records: 2042/2045 (99.9%)
+
+Median Income:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      $50,000         $50,000              369       
+Q2                   $50,000         $50,000              408       
+Q3                   $51,400         $51,600              408       
+Q4                   $50,800         $50,800              409       
+Q5 (Highest 20%)     $53,200         $54,400              409       
+-----------------------------------------------------------------
+Overall Median       $51,200         N/A                  2003      
+Valid Records: 2003/2045 (97.9%)
+
+Median Dwelling Value:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      $500,000        $500,000             377       
+Q2                   $548,000        $548,000             395       
+Q3                   $552,000        $552,000             383       
+Q4                   $552,000        $552,000             389       
+Q5 (Highest 20%)     $500,000        $564,000             392       
+-----------------------------------------------------------------
+Overall Median       $548,000        N/A                  1936      
+Valid Records: 1936/2045 (94.7%)
+
+Population Density:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      3286.6 people/km� 3253.4 people/km�    410       
+Q2                   3084.6 people/km� 3084.6 people/km�    409       
+Q3                   3083.9 people/km� 3078.7 people/km�    408       
+Q4                   2932.4 people/km� 2907.3 people/km�    409       
+Q5 (Highest 20%)     2577.6 people/km� 2297.9 people/km�    409       
+-----------------------------------------------------------------
+Overall Median       3051.6 people/km� N/A                  2045      
+Valid Records: 2045/2045 (100.0%)
+
+Area (sq km):
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      0.11 km�        0.11 km�             410       
+Q2                   0.15 km�        0.15 km�             409       
+Q3                   0.18 km�        0.19 km�             408       
+Q4                   0.25 km�        0.25 km�             409       
+Q5 (Highest 20%)     0.56 km�        0.73 km�             409       
+-----------------------------------------------------------------
+Overall Median       0.19 km�        N/A                  2045      
+Valid Records: 2045/2045 (100.0%)
+
+Population:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      361.5           372.0                410       
+Q2                   473.0           475.0                409       
+Q3                   565.0           568.0                408       
+Q4                   727.0           737.0                409       
+Q5 (Highest 20%)     1184.0          1435.0               409       
+-----------------------------------------------------------------
+Overall Median       565.0           N/A                  2045      
+Valid Records: 2045/2045 (100.0%)
+
+Dwellings:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      146.0           149.0                410       
+Q2                   196.0           197.0                409       
+Q3                   235.0           236.0                408       
+Q4                   297.0           300.0                409       
+Q5 (Highest 20%)     490.0           609.0                409       
+-----------------------------------------------------------------
+Overall Median       246.0           N/A                  2045      
+Valid Records: 2045/2045 (100.0%)
+
+Households:
+--------------------------------------------------
+c:\Users\kiera\Documents\BusinessVenueAnalyzer\quintile_analysis.py:54: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  weighted_median = valid_data.groupby('Population Quintile', observed=True).apply(
+Quintile             Median          Weighted Median      Count     
+-----------------------------------------------------------------
+Q1 (Lowest 20%)      141.0           146.0                410       
+Q2                   190.0           191.0                409       
+Q3                   227.0           228.0                408       
+Q4                   287.0           290.0                409       
+Q5 (Highest 20%)     470.0           578.0                409       
+-----------------------------------------------------------------
+Overall Median       233.0           N/A                  2045      
+Valid Records: 2045/2045 (100.0%)
+
+================================================================================
+QUINTILE POPULATION STATISTICS
+================================================================================
+
+Population Distribution:
+------------------------------------------------------------
+Q1 (Lowest 20%):
+  Areas: 410
+  Total Population: 142,186
+  Average Population: 347
+  Median Population: 362
+  Total Area: 319.9 km�
+  Average Area: 0.78 km�
+
+Q2:
+  Areas: 409
+  Total Population: 193,308
+  Average Population: 473
+  Median Population: 473
+  Total Area: 1,168.4 km�
+  Average Area: 2.86 km�
+
+Q3:
+  Areas: 408
+  Total Population: 232,425
+  Average Population: 570
+  Median Population: 565
+  Total Area: 2,017.3 km�
+  Average Area: 4.94 km�
+
+Q4:
+  Areas: 409
+  Total Population: 300,768
+  Average Population: 735
+  Median Population: 727
+  Total Area: 2,378.9 km�
+  Average Area: 5.82 km�
+
+Q5 (Highest 20%):
+  Areas: 409
+  Total Population: 619,620
+  Average Population: 1,515
+  Median Population: 1,184
+  Total Area: 2,162.5 km�
+  Average Area: 5.29 km�
+
+
+================================================================================
+SUMMARY TABLE - MEDIAN VALUES BY QUINTILE
+================================================================================
+                Metric   Q1 (Lowest 20%)                Q2                Q3                Q4  Q5 (Highest 20%)
+           Average Age              43.1              42.3              41.9              40.6              38.9
+Average Household Size               2.5               2.4               2.5               2.6               2.6
+         Median Income           $50,000           $50,000           $51,400           $50,800           $53,200
+ Median Dwelling Value          $500,000          $548,000          $552,000          $552,000          $500,000
+    Population Density 3286.6 people/km� 3084.6 people/km� 3083.9 people/km� 2932.4 people/km� 2577.6 people/km�
+          Area (sq km)          0.11 km�          0.15 km�          0.18 km�          0.25 km�          0.56 km�
+            Population             361.5             473.0             565.0             727.0            1184.0
+             Dwellings             146.0             196.0             235.0             297.0             490.0
+            Households             141.0             190.0             227.0             287.0             470.0
+
+================================================================================
+QUINTILE RANGES
+================================================================================
+
+Population Ranges by Quintile:
+----------------------------------------
+Q1 (Lowest 20%): 0 - 424 people
+Q2: 425 - 517 people
+Q3: 518 - 634 people
+Q4: 635 - 875 people
+Q5 (Highest 20%): 877 - 9,104 people
