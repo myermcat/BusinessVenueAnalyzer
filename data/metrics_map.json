@@ -4,9 +4,9 @@
     "metrics": {
       "foot_traffic": 0.35,
       "competitor_count": 0.3,
-      "avg_rating_nearby": 0.2,
+      "school_business_proximity": 0.2,
       "parking_availability": 0.1,
-      "school_proximity": 0.05
+      "local_income": 0.05
     }
   },
   "office_clinic": {
