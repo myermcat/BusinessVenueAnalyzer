@@ -24,8 +24,8 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-      <div className="p-6">
+    <div className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ${isExpanded ? 'h-auto' : 'h-fit'}`}>
+      <div className="p-6 h-full flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
@@ -64,7 +64,7 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
         </div>
 
         {/* Expandable Details */}
-        {isExpanded && (
+        <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="border-t pt-4 space-y-3">
             {competitor.opening_hours && (
               <div>
@@ -129,7 +129,7 @@ export function CompetitorCard({ competitor }: CompetitorCardProps) {
               </div>
             )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
