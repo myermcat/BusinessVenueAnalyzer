@@ -55,7 +55,7 @@ def _log_request(location: Tuple[float, float], radius: int) -> None:
 class ParkingAPI:
     """Tiny wrapper around Google Places API restricted to *parking* type."""
 
-    DEFAULT_RADIUS_METERS = 500  # Roughly 2–3 city blocks
+    DEFAULT_RADIUS_METERS = 1000  # Roughly 2–3 city blocks
 
     def __init__(self, api_key: str, *, timeout: int = 5) -> None:
         if not api_key:

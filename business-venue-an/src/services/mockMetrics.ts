@@ -6,9 +6,9 @@ import { competitorCountApi, CompetitorCountResponse } from './competitorCountAp
 const metricsMap = {
   "restaurant_cafe": {
     "foot_traffic": 0.3,
-    "competitor_count": 0.25,
+    "competitor_count": 0.3,
     "local_income": 0.2,
-    "dwelling_value": 0.15,
+    "dwelling_value": 0.1,
     "parking_availability": 0.1
   },
   "office_clinic": {
@@ -142,7 +142,7 @@ export async function generateMetricsWithCensusData(businessType: string, locati
     if (censusData && metricName === 'local_income') {
       // Map median income to a 0-100 score
       const income = censusData.walking_radius.avg_median_income;
-      score = Math.min(100, Math.max(0, (income / 100000) * 100)); // Normalize to $100k = 100 points
+      score = Math.min(100, Math.max(0, (income / 65000) * 100)); // Normalize to $100k = 100 points
       description = `${metricDescriptions[metricName]} | Median Income: $${income.toLocaleString()}`;
     } else if (censusData && metricName === 'dwelling_value') {
       // Map dwelling value to a 0-100 score
@@ -179,7 +179,7 @@ export async function generateMetricsWithCensusData(businessType: string, locati
       if (competitorCount === 0) {
         score = 100;
       } else {
-        score = Math.max(10, 100 - (competitorCount * 4.5)); // Linear decrease
+        score = Math.max(7, 100 - (competitorCount * 4.5)); // Linear decrease
       }
       
       description = `${metricDescriptions[metricName]} | Found ${competitorCount} direct competitors in the area`;

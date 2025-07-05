@@ -5,7 +5,7 @@ from datetime import datetime
 class CompetitorAnalysisRequest(BaseModel):
     business_type: str = Field(..., description="Type of business (e.g., 'cafe', 'restaurant')")
     location: str = Field(..., description="Location to search (e.g., 'centretown ottawa')")
-    radius_meters: int = Field(default=2000, ge=100, le=50000, description="Search radius in meters")
+    radius_meters: int = Field(default=1000, ge=100, le=50000, description="Search radius in meters")
     max_results: int = Field(default=10, ge=1, le=20, description="Maximum number of competitors to return")
     min_rating: float = Field(default=0.0, ge=0.0, le=5.0, description="Minimum rating filter")
     open_now: bool = Field(default=False, description="Filter for currently open businesses")
